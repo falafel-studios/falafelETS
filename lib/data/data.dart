@@ -29,11 +29,11 @@ Map<String, int> points = {
 
 class CardReturn {
   final Points points;
-  final String text;
+  final CardData card;
 
   const CardReturn({
     required this.points,
-    required this.text,
+    required this.card,
   });
 }
 
@@ -41,7 +41,7 @@ class CardData {
   final int id;
   final String name;
   final String text;
-  final String information;
+  final String? information;
   final bool informative;
   final Function left;
   final Function right;
@@ -51,7 +51,7 @@ class CardData {
     required this.id,
     required this.name,
     required this.text,
-    required this.information,
+    this.information,
     required this.informative,
     required this.left,
     required this.right,
@@ -63,8 +63,7 @@ const info = [
   CardData(
       id: 0,
       name: "Initial",
-      text: "",
-      information: "",
+      text: "Estàs a punt per començar?",
       informative: false,
       left: dummy,
       right: dummy,
@@ -73,7 +72,6 @@ const info = [
       id: 1,
       name: "Drunk",
       text: "",
-      information: "",
       informative: false,
       left: dummy,
       right: dummy,
@@ -82,7 +80,6 @@ const info = [
       id: 2,
       name: "Drive",
       text: "",
-      information: "",
       informative: false,
       left: dummy,
       right: dummy,
@@ -91,7 +88,6 @@ const info = [
       id: 3,
       name: "Sex",
       text: "",
-      information: "",
       informative: false,
       left: dummy,
       right: dummy,
@@ -100,7 +96,6 @@ const info = [
       id: 4,
       name: "Death",
       text: "",
-      information: "",
       informative: false,
       left: dummy,
       right: dummy,
@@ -159,6 +154,6 @@ const info = [
 
 CardReturn dummy() {
   const Points p = Points(health: 12, money: -12, energy: 0, mental: 4);
-  const CardReturn a = CardReturn(points: p, text: "a");
+  CardReturn a = CardReturn(points: p, card: info[1]);
   return a;
 }
