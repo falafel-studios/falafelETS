@@ -4,10 +4,15 @@ import 'data.dart';
 
 class CardStore extends ChangeNotifier {
   CardData card = info[0];
-
+  int index = 0;
   setCard(CardData card) {
     this.card = card;
     notifyListeners();
+  }
+
+  sumIndex(){
+    int position = (index + 1) % info.length;
+    setCard(info[position]);
   }
 }
 
