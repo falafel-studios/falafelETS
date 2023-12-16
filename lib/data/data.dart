@@ -20,23 +20,6 @@ class Points {
   });
 }
 
-Map<String, int> points = {
-  "life": 50,
-  "money": 50,
-  "energy": 50,
-  "mental": 50,
-};
-
-class CardReturn {
-  final Points points;
-  final CardData card;
-
-  const CardReturn({
-    required this.points,
-    required this.card,
-  });
-}
-
 class CardData {
   final int id;
   final String name;
@@ -152,8 +135,6 @@ const info = [
       img: "./img"),
 ];
 
-CardReturn dummy() {
+dummy() {
   const Points p = Points(health: 12, money: -12, energy: 0, mental: 4);
-  CardReturn a = CardReturn(points: p, card: info[1]);
-  return a;
 }
