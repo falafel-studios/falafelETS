@@ -1,8 +1,8 @@
 class Points {
-  final int health;
-  final int money;
-  final int energy;
-  final int mental;
+  final double health;
+  final double money;
+  final double energy;
+  final double mental;
 
   operator +(Points p) {
     return Points(
