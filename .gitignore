@@ -25,4 +25,11 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
-.idea
+
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
