@@ -1,11 +1,42 @@
+class Points{
+  final int health;
+  final int money;
+  final int energy;
+  final int mental;
+
+  const Points({
+    required this.health,
+    required this.money,
+    required this.energy,
+    required this.mental,
+  });
+}
+
+Map<String,int> points = {
+  "life": 50,
+  "money": 50,
+  "energy": 50,
+  "mental": 50,
+};
+
+class CardReturn{
+  final Points points;
+  final String text;
+
+  const CardReturn({
+    required this.points,
+    required this.text,
+  });
+}
+
 class CardData{
   final int id;
   final String name;
   final String text;
   final String information;
   final bool informative;
-  final void left;
-  final void right;
+  final Function left;
+  final Function right;
   final String img;
 
   const CardData({
@@ -103,6 +134,8 @@ const info = [
       img: "./img"),
 ];
 
-void dummy(){}
-
-
+CardReturn dummy(){
+  const Points p = Points(health: 12, money: -12, energy: 0, mental: 4);
+  const CardReturn a = CardReturn(points: p, text: "a");
+  return a;
+}
