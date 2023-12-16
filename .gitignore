@@ -10,7 +10,7 @@ pubspec.lock
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/
-
+falafel_ets.iml
 # dotenv environment variables file
 .env*
 
@@ -25,11 +25,9 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
-
-
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-
+.idea
