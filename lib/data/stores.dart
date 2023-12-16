@@ -12,11 +12,7 @@ class CardStore extends ChangeNotifier {
 }
 
 class PointStore extends ChangeNotifier {
-  Points points = const Points(health: 0, money: 0, energy: 0, mental: 0);
-
-  PointState() {
-    points = const Points(health: 0, money: 0, energy: 0, mental: 0);
-  }
+  Points points = const Points(health: 50, money: 50, energy: 50, mental: 50);
 
   setPoints(Points p) {
     points = p;
