@@ -1,6 +1,14 @@
+import 'package:falafel_ets/data/stories.dart';
 import 'package:flutter/material.dart';
 
 import 'data.dart';
+
+
+var info = [
+  buildStory1(),
+];
+
+
 
 class CardStore extends ChangeNotifier {
   CardData card = info[0];

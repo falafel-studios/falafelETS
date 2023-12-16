@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'data/stores.dart';
-import 'data/data.dart';
+import 'stores.dart';
+import 'data.dart';
 
 nextStory(CardData data){
   return (BuildContext context) {
