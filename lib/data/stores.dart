@@ -11,7 +11,7 @@ var info = [
 
 
 class CardStore extends ChangeNotifier {
-  CardData card = info[0];
+  CardData card = buildStory1();
   int index = 0;
   setCard(CardData card) {
     this.card = card;

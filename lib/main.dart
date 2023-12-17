@@ -8,6 +8,8 @@ import 'package:falafel_ets/flutter_card_swiper.dart';
 import 'package:falafel_ets/example_candidate_model.dart';
 import 'package:falafel_ets/example_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'liquid.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
@@ -62,12 +64,16 @@ class StateConsumerExample extends StatelessWidget {
       int? currentIndex,
       CardSwiperDirection direction,
     ) {
+      var bool = direction.name == "left";
       debugPrint(
-        'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
+'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top, $bool',
       );
       var cardStore = Provider.of<CardStore>(context, listen: false);
-      cardStore.setCard(info[(cardStore.card.id + 1) % info.length]);
-
+      if (bool) {
+        cardStore.card.left(context);
+      } else {
+        cardStore.card.right(context);
+      }
       return true;
     };
   }
@@ -80,72 +86,77 @@ class StateConsumerExample extends StatelessWidget {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Consumer<CardStore>(
-              builder: (context, cardSt, _) => Text(
-                cardSt.card.name,
-                style: Theme.of(context).textTheme.headlineMedium,
+        child: ConstrainedBox(
+          
+          constraints: BoxConstraints.t,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              LiquidCustomProgressIndicatorPage(),
+              Consumer<CardStore>(
+                builder: (context, cardSt, _) => Text(
+                  cardSt.card.text,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
               ),
-            ),
-            Container(
-              width: 300,
-              height: 400,
-              child: CardSwiper(
-                  controller: controller,
-                  cardsCount: 3,
-                  onSwipe: _onSwipe(context),
-                  numberOfCardsDisplayed: 3,
-                  backCardOffset: const Offset(0, 0),
-                  padding: const EdgeInsets.all(24.0),
-                  cardBuilder: (
-                    context,
-                    index,
-                    horizontalThresholdPercentage,
-                    verticalThresholdPercentage,
-                    opacity,
-                  ) =>
-                      Center(
-                          child: Container(
-                              width: 300,
-                              child: Stack(children: [
-                                Consumer<CardStore>(
-                                    builder: (ctx, cardStore, _) =>
-                                        ExampleCard(cardStore.card,opacity)),
-                                Opacity(
-                                    opacity: opacity.abs(),
-                                    child: opacity < 0
-                                        ? const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(left: 15.0,top: 6.0),
-                                                  child: Text(
-                                                    "No",
-                                                    style:
-                                                        TextStyle(fontSize: 40),
-                                                  ),
-                                                )
-                                              ])
-                                        : const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(right: 15.0,top: 6.0),
-                                                  child: Text(
-                                                    "Si",
-                                                    style:
-                                                        TextStyle(fontSize: 40),
-                                                  ),
-                                                )
-                                              ]))
-                              ])))),
-            ),
+              Container(
+                width: 300,
+                height: 400,
+                child: CardSwiper(
+                    controller: controller,
+                    cardsCount: 3,
+                    onSwipe: _onSwipe(context),
+                    numberOfCardsDisplayed: 3,
+                    backCardOffset: const Offset(0, 0),
+                    padding: const EdgeInsets.all(24.0),
+                    cardBuilder: (
+                      context,
+                      index,
+                      horizontalThresholdPercentage,
+                      verticalThresholdPercentage,
+                      opacity,
+                    ) =>
+                        Center(
+                            child: Container(
+                                width: 300,
+                                child: Stack(children: [
+                                  Consumer<CardStore>(
+                                      builder: (ctx, cardStore, _) =>
+                                          ExampleCard(cardStore.card,opacity)),
+                                  Opacity(
+                                      opacity: opacity.abs(),
+                                      child: opacity < 0
+                                          ? const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(left: 15.0,top: 6.0),
+                                                    child: Text(
+                                                      "No",
+                                                      style:
+                                                          TextStyle(fontSize: 40),
+                                                    ),
+                                                  )
+                                                ])
+                                          : const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(right: 15.0,top: 6.0),
+                                                    child: Text(
+                                                      "Si",
+                                                      style:
+                                                          TextStyle(fontSize: 40),
+                                                    ),
+                                                  )
+                                                ]))
+                                ])))),
+              ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

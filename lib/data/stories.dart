@@ -5,7 +5,7 @@ import 'logic.dart';
 CardData buildStory1() {
   return CardData(
       id: 0,
-      name: "rollete1",
+      name: "Rollete 1",
       text:
           "Es dijous i has sortit de festa, estas en un bar i començes a parlar amb una persona que et sembla atractiva la cosa flueix i es dona la situacio de peto. Procedeixes amb el peto?",
       informative: false,
@@ -28,7 +28,7 @@ CardData buildRightCard() => CardData(
 
 rightBranchStory2() {
   var aidsCard = buildAidsCard();
-  nextStory(CardData(
+  return nextStory(CardData(
       id: 2,
       name: "casa",
       text:
@@ -51,7 +51,7 @@ rightBranchStory2() {
 }
 
 buildAidsCard() {
-  nextStoryPointsAndCard(
+  return nextStoryPointsAndCard(
                 CardData(
                     id: 4,
                     name: "NoCondo",
