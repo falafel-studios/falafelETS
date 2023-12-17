@@ -87,19 +87,7 @@ class StateConsumerExample extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const PointsBar(),
-              FittedBox(
-                  child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SizedBox(
-                    width: 400,
-                    child: Consumer<CardStore>(
-                      builder: (context, cardSt, _) => Text(
-                        cardSt.card.text,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                    )),
-              )),
+
               Container(
                 width: 300,
                 height: 400,
