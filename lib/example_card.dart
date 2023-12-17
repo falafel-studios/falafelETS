@@ -67,7 +67,7 @@ class ExampleCard extends StatelessWidget {
                     children: [
                       SizedBox(
                         child: Text(
-                          //isBack?candidate.information:
+                          isBack?candidate.information:
                           candidate.text,
                           style: Theme.of(context)
                               .textTheme
