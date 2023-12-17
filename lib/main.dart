@@ -5,6 +5,7 @@ import 'package:falafel_ets/liquid.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_flip_card/flutter_flip_card.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -77,6 +78,7 @@ class StateConsumerExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CardSwiperController controller = CardSwiperController();
+    final cong1 = FlipCardController();
     return Scaffold(
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -90,7 +92,6 @@ class StateConsumerExample extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: PointsBar(),
               ),
-
               Container(
                 height: 400,
                 child: CardSwiper(
@@ -110,11 +111,27 @@ class StateConsumerExample extends StatelessWidget {
                         Center(
                             child: Container(
                                 child: Stack(children: [
-                                  Consumer<CardStore>(
-                                      builder: (ctx, cardStore, _) =>
-                                          ExampleCard(cardStore.card, opacity)),
-
-                                ])))),
+                          Consumer<CardStore>(
+                            builder: (ctx, cardStore, _) => GestureDetector(
+                              onTap: () => cardStore.card.informative
+                                  ? cong1.flipcard()
+                                  : null,
+                              child: FlipCard(
+                                onTapFlipping: false,
+                                controller: cong1,
+                                axis: FlipAxis.vertical,
+                                rotateSide: RotateSide.left,
+                                animationDuration:
+                                    const Duration(milliseconds: 1000),
+                                frontWidget: Center(
+                                    child: ExampleCard(
+                                        cardStore.card, opacity, false)),
+                                backWidget:
+                                    ExampleCard(cardStore.card, opacity, true),
+                              ),
+                            ),
+                          ),
+                        ])))),
               ),
             ],
           ),

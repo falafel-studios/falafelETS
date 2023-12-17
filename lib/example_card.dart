@@ -8,10 +8,12 @@ import 'example_candidate_model.dart';
 class ExampleCard extends StatelessWidget {
   final CardData candidate;
   final double opacity;
+  final bool isBack;
 
   const ExampleCard(
     this.candidate,
-    this.opacity, {
+    this.opacity,
+    this.isBack, {
     Key? key,
   }) : super(key: key);
 
@@ -58,17 +60,33 @@ class ExampleCard extends StatelessWidget {
                 ),
                 //FittedBox()
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15.0, 60.0, 15.0, 10.0),
+                  padding:  EdgeInsets.fromLTRB(15.0, candidate.informative?30.0:60.0, 15.0, 10.0),
                   child: SingleChildScrollView(
-                      child: SizedBox(
-                    child: Text(
-                      candidate.text,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: 21, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        child: Text(
+                          //isBack?candidate.information:
+                          candidate.text,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(fontSize: 21, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      candidate.informative
+                          ? Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: const Icon(
+                                Icons.touch_app_sharp,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            )
+                          : Container(),
+                    ],
                   )),
                 ),
               ),
@@ -77,7 +95,7 @@ class ExampleCard extends StatelessWidget {
         ),
       ),
       Opacity(
-          opacity: candidate.informative?0:opacity.abs(),
+          opacity: candidate.informative ? 0 : opacity.abs(),
           child: opacity < 0
               ? const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Padding(
