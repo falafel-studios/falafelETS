@@ -36,7 +36,7 @@ class CardData {
     required this.id,
     required this.name,
     required this.text,
-    required this.information,
+    this.information = "",
     required this.informative,
     required this.left,
     required this.right,
