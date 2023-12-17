@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:falafel_ets/data/data.dart';
 import 'package:flutter/material.dart';
 
-import 'example_candidate_model.dart';
+
 
 class ExampleCard extends StatelessWidget {
   final CardData candidate;
@@ -54,7 +54,7 @@ class ExampleCard extends StatelessWidget {
                         : [
                             Color.fromARGB(
                                 255, redColor, greenColor, blueColor),
-                            Color(0xFF5f39f7)
+                            const Color(0xFF5f39f7)
                           ],
                   ),
                 ),
@@ -62,7 +62,8 @@ class ExampleCard extends StatelessWidget {
                 child: Padding(
                   padding:  EdgeInsets.fromLTRB(15.0, candidate.informative?30.0:60.0, 15.0, 10.0),
                   child: SingleChildScrollView(
-                      child: Stack(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         child: Text(
@@ -76,21 +77,14 @@ class ExampleCard extends StatelessWidget {
                         ),
                       ),
                       candidate.informative
-                          ? const Align(
-                        alignment: Alignment.bottomCenter,
-                            child: Column(
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Icon(
-                                      Icons.touch_app_sharp,
-                                      color: Colors.white,
-                                      size: 35,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          )
+                          ? const Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Icon(
+                                Icons.touch_app_sharp,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            )
                           : Container(),
                     ],
                   )),
