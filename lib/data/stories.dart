@@ -38,7 +38,7 @@ CardData buildRightCard() {
       id: 1,
       name: "Herpes",
       text: "Has tingut la mala sort de contagiarte d'herpes bucal.",
-      informative: true,
+      informative: false,
       information: "Herpes bucal",
       right: story,
       left: story,
@@ -165,7 +165,7 @@ buildAidsCard() {
         name: "NoCondo",
         text:
             "Has decidit tenir relacion sexuals sense proteccio i has tingut la mala sort de contagiarte de HIV :(.",
-        informative: true,
+        informative: false,
         left: buildAidsExplain2,
         right: buildAidsExplain2,
         img: '',
