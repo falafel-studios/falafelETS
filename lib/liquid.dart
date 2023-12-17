@@ -1,9 +1,11 @@
+import 'package:falafel_ets/data/stores.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:polygon/polygon.dart';
+import 'package:provider/provider.dart';
 
-class LiquidCustomProgressIndicatorPage extends StatelessWidget {
-  const LiquidCustomProgressIndicatorPage({super.key});
+class PointsBar extends StatelessWidget {
+  const PointsBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +20,20 @@ class LiquidCustomProgressIndicatorPage extends StatelessWidget {
               child: Card(
                   child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    buildLiquidIcon(AlwaysStoppedAnimation(Colors.green),
-                        buildDollarPath(), 0.9),
-                    buildLiquidIcon(AlwaysStoppedAnimation(Colors.yellow),
-                        _buildThunderPath(), 0.9),
-                    buildLiquidIcon(AlwaysStoppedAnimation(Colors.red),
-                        _buildHeartPath(), 0.9),
-                    buildLiquidIcon(AlwaysStoppedAnimation(Colors.blue),
-                        _buildBrainPath(), 0.9),
-                  ],
+                child: Consumer<PointStore>(
+                  builder: (ctx, pointStore, _) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.green),
+                          buildDollarPath(), pointStore.points.health / 100),
+                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.yellow),
+                          _buildThunderPath(), pointStore.points.energy / 100),
+                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.red),
+                          _buildHeartPath(), pointStore.points.health / 100),
+                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.blue),
+                          _buildBrainPath(), pointStore.points.mental / 100),
+                    ],
+                  ),
                 ),
               )))
         ],

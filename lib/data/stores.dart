@@ -1,13 +1,26 @@
+import 'package:falafel_ets/data/stories.dart';
 import 'package:flutter/material.dart';
 
 import 'data.dart';
 
-class CardStore extends ChangeNotifier {
-  CardData card = info[0];
 
+var info = [
+  buildStory1(),
+];
+
+
+
+class CardStore extends ChangeNotifier {
+  CardData card = buildStory1();
+  int index = 0;
   setCard(CardData card) {
     this.card = card;
     notifyListeners();
+  }
+
+  sumIndex(){
+    int position = (index + 1) % info.length;
+    setCard(info[position]);
   }
 }
 
