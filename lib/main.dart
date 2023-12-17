@@ -82,14 +82,16 @@ class StateConsumerExample extends StatelessWidget {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: SizedBox(
-          width: 300,
+          width: 600,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const PointsBar(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: PointsBar(),
+              ),
 
               Container(
-                width: 300,
                 height: 400,
                 child: CardSwiper(
                     controller: controller,
@@ -107,42 +109,11 @@ class StateConsumerExample extends StatelessWidget {
                     ) =>
                         Center(
                             child: Container(
-                                width: 300,
                                 child: Stack(children: [
                                   Consumer<CardStore>(
                                       builder: (ctx, cardStore, _) =>
                                           ExampleCard(cardStore.card, opacity)),
-                                  Opacity(
-                                      opacity: opacity.abs(),
-                                      child: opacity < 0
-                                          ? const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 15.0, top: 6.0),
-                                                    child: Text(
-                                                      "No",
-                                                      style: TextStyle(
-                                                          fontSize: 40),
-                                                    ),
-                                                  )
-                                                ])
-                                          : const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: 15.0, top: 6.0),
-                                                    child: Text(
-                                                      "Si",
-                                                      style: TextStyle(
-                                                          fontSize: 40),
-                                                    ),
-                                                  )
-                                                ]))
+
                                 ])))),
               ),
             ],
