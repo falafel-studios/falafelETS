@@ -16,7 +16,7 @@ nextStoryPoints(Points points){
     var providerCard = Provider.of<CardStore>(context, listen: false);
     var providerPoint = Provider.of<PointStore>(context, listen: false);
     providerCard.sumIndex();
-    providerPoint.setPoints(points);
+    providerPoint.addPoints(points);
   };
 }
 
@@ -25,6 +25,6 @@ nextStoryPointsAndCard(CardData card, Points points){
     var providerCard = Provider.of<CardStore>(context, listen: false);
     var providerPoint = Provider.of<PointStore>(context, listen: false);
     providerCard.setCard(card);
-    providerPoint.setPoints(points);
+    providerPoint.addPoints(points);
   };
 }
