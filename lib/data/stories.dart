@@ -6,9 +6,9 @@ CardData buildStory1() {
   return CardData(
       id: 0,
       name: "Rollete 1",
-      text: "Es dijous i has sortit de festa, estas en un bar i començes"
-          "a parlar amb una persona que et sembla atractiva la cosa flueix"
-          "i es dona la situacio de peto. Procedeixes amb el peto?",
+      text: "És dijous i has sortit de festa, estas en un bar "
+          "i comences a parlar amb una persona. La cosa flueix "
+          "i es dona la situació de petó. Procedeixes amb el petó?",
       informative: false,
       left: nextStoryPoints(
           const Points(health: 0, money: 0, energy: -1, mental: -5)),
@@ -16,32 +16,22 @@ CardData buildStory1() {
       img: "");
 }
 
-CardData buildHerpesExplain() => CardData(
-    id: 1,
-    name: "Herpes",
-    text: "l'herpes bucal, coneguda també com a herpes labial, és una infecció "
-        "viral comuna causada pel virus de l'herpes simple. es caracteritza per "
-        "la formació de berrugues o úlceres doloroses al voltant de la boca."
-        "els brots solen ser recurrents i poden ser desencadenats per factors "
-        "com l'estrès o l'exposició al sol. el tractament sovint inclou "
-        "medicaments antivirals tòpics per alleujar els símptomes.",
-    informative: true,
-    information: "Herpes bucal",
-    right: rightBranchStory2(),
-    left: nextStoryPoints(
-        const Points(health: 0, money: 0, energy: 0, mental: 0)),
-    img: "");
 
 CardData buildRightCard() {
-  var story = nextStory(buildHerpesExplain());
   return CardData(
       id: 1,
       name: "Herpes",
       text: "Has tingut la mala sort de contagiarte d'herpes bucal.",
-      informative: false,
-      information: "Herpes bucal",
-      right: story,
-      left: story,
+      informative: true,
+      information: "L'herpes bucal, coneguda també com a herpes labial, és una infecció "
+          "viral comuna causada pel virus de l'herpes simple. es caracteritza per "
+          "la formació de berrugues o úlceres doloroses al voltant de la boca."
+          "els brots solen ser recurrents i poden ser desencadenats per factors "
+          "com l'estrès o l'exposició al sol. el tractament sovint inclou "
+          "medicaments antivirals tòpics per alleujar els símptomes.",
+      right: rightBranchStory2(),
+      left: nextStoryPoints(
+          const Points(health: 0, money: 0, energy: 0, mental: 0)),
       img: "");
 }
 
@@ -51,7 +41,8 @@ rightBranchStory2() {
       id: 2,
       name: "casa",
       text:
-          "La nit avança i la cosa rulla, entre broma i broma acabeu parlant d'anar a casa junts. Accedeixes?",
+      "La nit avança i la conversacio tambe, hi ha feeling i"
+          "acabeu parlant d'anar a casa junts. Accedeixes?",
       informative: false,
       left: nextStoryPoints(
           const Points(health: 0, money: 10, energy: 10, mental: 20)),
@@ -59,9 +50,9 @@ rightBranchStory2() {
           CardData(
               id: 3,
               name: "brokenCondom",
-              text: "La nit es jove i les ganes son moltes per tant el tema"
-                  "avança , i decidiu mantenir relacions sexuals. Amb"
-                  "proteccio o sense?",
+              text: "La nit és jove i les ganes de passar-ho be són moltes,"
+                  "per tant la conversa avança. Finalment, decideixen mantenir"
+                  " relacions sexuals. Amb protecció o sense?",
               informative: false,
               left: aidsCard,
               right: nextStoryPointsAndCard(
@@ -108,66 +99,37 @@ rightBranchStory2() {
       img: ""));
 }
 
-buildAidsExplain() {
-  return nextStoryPointsAndCard(
-      CardData(
-          id: 4,
-          name: "NoCondo",
-          text: "La infecció pel VIH (virus de la immunodeficiència"
-              "humana) és una condició crònica que afecta el sistema "
-              "immunològic. Es transmet principalment a través de"
-              "relacions sexuals no protegides o contacte amb fluids"
-              "corporals infectats. El VIH pot evolucionar cap al"
-              "SIDA (síndrome d'immunodeficiència adquirida) si no"
-              "es tracta adequadament. Malgrat que no hi ha cura,"
-              "els medicaments antiretrovirals poden gestionar la"
-              "infecció i mantenir una vida saludable. És crucial"
-              "fer proves regulars i prendre precaucions per prevenir"
-              "la transmissió.",
-          informative: true,
-          left: nextStoryPoints(
-              const Points(health: 0, money: 0, energy: 0, mental: 0)),
-          right: nextStory(CardData(
-              id: 6,
-              name: "Farmacia",
-              text:
-                  "Us heu despertat el dia seguent i us esteu plantejant si anar a aconseguir la pastilla per el VIH. Que feu, aneu a comprar-la?",
-              informative: false,
-              left: nextStoryPoints(const Points(
-                  health: -10, money: 15, energy: -10, mental: -10)),
-              right: nextStory(CardData(
-                  id: 7,
-                  name: "PatillaComprada",
-                  text: "Heu comprat la pastilla tot be, like ,La píndola"
-                      "del dia següent és un anticonceptiu d'emergència"
-                      "que pot prevenir l'embaràs després d'una relació"
-                      "sexual sense protecció. S'ha de prendre tan aviat"
-                      "com sigui possible després de l'acte, i pot ser"
-                      "efectiva fins a 72 hores després. Consulta amb un"
-                      "professional de la salut per obtenir informació"
-                      "específica i consell personalitzat.",
-                  informative: true,
-                  left: nextStoryPoints(
-                      const Points(health: 0, money: 0, energy: 0, mental: 0)),
-                  right: nextStoryPoints(
-                      const Points(health: 0, money: 0, energy: 0, mental: 0)),
-                  img: "")),
-              img: "")),
-          img: ""),
-      const Points(health: 10, money: -10, energy: -10, mental: -10));
-}
 
 buildAidsCard() {
-  var buildAidsExplain2 = buildAidsExplain();
   return nextStoryPointsAndCard(
       CardData(
         id: 4,
         name: "NoCondo",
         text:
-            "Has decidit tenir relacion sexuals sense proteccio i has tingut la mala sort de contagiarte de HIV :(.",
+            "Has decidit tenir relacion sexuals sense proteccio i esteu preocupats"
+                " de si us podrieu haver contagiat d'alguna ETS"
+                ", us plantejeu d'anar al CAP per obtenir la pastilla del VIH"
+                "Aneu a per la pildora?",
         informative: false,
-        left: buildAidsExplain2,
-        right: buildAidsExplain2,
+        left: nextStoryPoints(const Points(
+            health: -10, money: 15, energy: -10, mental: -10)),
+        right: nextStory(CardData(
+            id: 7,
+            name: "PatillaComprada",
+            text: "Heu comprat la pastilla  ",
+            informative: true,
+            information: "La píndola del dia següent és un anticonceptiu d'emergència"
+                "que pot prevenir l'embaràs després d'una relació"
+                "sexual sense protecció. S'ha de prendre tan aviat"
+                "com sigui possible després de l'acte, i pot ser"
+                "efectiva fins a 72 hores després. Consulta amb un"
+                "professional de la salut per obtenir informació"
+                "específica i consell personalitzat.",
+            left: nextStoryPoints(
+                const Points(health: 0, money: 0, energy: 0, mental: 0)),
+            right: nextStoryPoints(
+                const Points(health: 0, money: 0, energy: 0, mental: 0)),
+            img: "")),
         img: '',
       ),
       const Points(health: -5, money: -10, energy: -3, mental: -3));
