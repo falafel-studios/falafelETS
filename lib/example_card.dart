@@ -40,6 +40,7 @@ class ExampleCard extends StatelessWidget {
         children: [
           Flexible(
             child: Container(
+              height: 500,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -49,6 +50,18 @@ class ExampleCard extends StatelessWidget {
                     Color(0xFF5f39f7)
                   ],
                 ),
+              ),
+              //FittedBox()
+              child: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      child: Text(
+                        candidate.text,
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 21),
+                        textAlign: TextAlign.center,
+                      ),
+                    )),
               ),
             ),
           ),
