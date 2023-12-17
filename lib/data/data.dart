@@ -1,4 +1,4 @@
-import 'package:falafel_ets/data/stories.dart';
+import 'dart:math';
 
 class Points {
   final double health;
@@ -8,10 +8,10 @@ class Points {
 
   operator +(Points p) {
     return Points(
-        health: health + p.health,
-        money: money + p.money,
-        energy: energy + p.energy,
-        mental: mental + p.mental);
+        health: max(min(health + p.health, 100), 0),
+        money: max(min(money + p.money, 100), 0),
+        energy: max(min(energy + p.energy, 100), 0),
+        mental: max(min(mental + p.mental, 100), 0));
   }
 
   const Points({

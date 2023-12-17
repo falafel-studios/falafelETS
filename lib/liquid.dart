@@ -24,14 +24,14 @@ class PointsBar extends StatelessWidget {
                   builder: (ctx, pointStore, _) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.green),
-                          buildDollarPath(), pointStore.points.health / 100),
-                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.yellow),
-                          _buildThunderPath(), pointStore.points.energy / 100),
-                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.red),
-                          _buildHeartPath(), pointStore.points.health / 100),
-                      buildLiquidIcon(AlwaysStoppedAnimation(Colors.blue),
-                          _buildBrainPath(), pointStore.points.mental / 100),
+                      buildLiquidIcon(Colors.green, Colors.greenAccent,
+                          buildDollarPath(), pointStore.points.health),
+                      buildLiquidIcon(Colors.yellow, Colors.amber,
+                          _buildThunderPath(), pointStore.points.energy),
+                      buildLiquidIcon(Colors.red, Colors.redAccent,
+                          _buildHeartPath(), pointStore.points.health),
+                      buildLiquidIcon(Colors.blue, Colors.blueAccent,
+                          _buildBrainPath(), pointStore.points.mental),
                     ],
                   ),
                 ),
@@ -41,18 +41,28 @@ class PointsBar extends StatelessWidget {
     );
   }
 
-  SizedBox buildLiquidIcon(
-      Animation<Color> color, Path path, double valueToShow) {
-    return SizedBox(
-        width: 50,
-        height: 50,
-        child: FittedBox(
-            child: LiquidCustomProgressIndicator(
-                backgroundColor: Colors.grey,
-                direction: Axis.vertical,
-                value: valueToShow,
-                valueColor: color,
-                shapePath: path)));
+  Widget buildLiquidIcon(
+      Color color, Color text, Path path, double valueToShow) {
+    return Column(
+      children: [
+        SizedBox(
+          width: 50,
+          height: 50,
+          child: FittedBox(
+              child: LiquidCustomProgressIndicator(
+            backgroundColor: Colors.grey,
+            direction: Axis.vertical,
+            value: valueToShow / 100,
+            valueColor: AlwaysStoppedAnimation(color),
+            shapePath: path,
+          )),
+        ),
+        Text(
+          '$valueToShow %',
+          style: TextStyle(color: text),
+        )
+      ],
+    );
   }
 
   Path _buildHeartPath() {
