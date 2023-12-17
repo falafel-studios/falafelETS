@@ -1,53 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyGameApp());
+  runApp(const GameOver());
 }
 
-class MyGameApp extends StatelessWidget {
+class GameOver extends StatelessWidget {
+  const GameOver({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        // Set up your Material 3 theme here if applicable
+        textTheme: GoogleFonts.josefinSansTextTheme(),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: MyGameScreen(),
+      home: const GameOverScreen(),
     );
   }
 }
 
-class MyGameScreen extends StatelessWidget {
+class GameOverScreen extends StatelessWidget {
+  const GameOverScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Card(
-          margin: EdgeInsets.all(16.0),
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
+        body: Container(
+          decoration: new BoxDecoration(color: Colors.white38),
+          child: Center(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Game Over',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                Padding(
+                  padding: const EdgeInsets.only(left: 0,top: 300,right: 0,bottom: 0),
+                  child: Text(" Gameover",
+                  style: TextStyle(fontSize: 60),),
                 ),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                      'Restart Game',
-                      style: TextStyle(color: Colors.red),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    side: 
+                Card(
+                  margin: const EdgeInsets.only(
+                      left: 0, top: 150, right: 0, bottom: 0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(elevation: 2),
+                          child: const Text(
+                            'Torna-hi a jugar',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ),
+        )
     );
   }
 }

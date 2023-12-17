@@ -52,9 +52,11 @@ rightBranchStory2() {
           CardData(
               id: 3,
               name: "brokenCondom",
-              text: "La nit és jove i les ganes de passar-ho be són moltes,"
-                  "per tant la conversa avança. Finalment, decideixen mantenir"
-                  " relacions sexuals. Amb protecció o sense?",
+              text: "Esteu a casa teva, hi ha bon ambient i la conversacio avança"
+                  " Finalment,i entre els dos, decidiu mantenir"
+                  " relacions sexuals. Aqui sorgeix la pregunta "
+                  "de si fer-ho amb protecció o sense"
+                  "Que feu?",
               informative: false,
               information: "",
               left: aidsCard,
