@@ -79,6 +79,7 @@ class StateConsumerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     final CardSwiperController controller = CardSwiperController();
     final cong1 = FlipCardController();
+    int time = 1000;
     return Scaffold(
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -112,24 +113,39 @@ class StateConsumerExample extends StatelessWidget {
                             child: Container(
                                 child: Stack(children: [
                           Consumer<CardStore>(
-                            builder: (ctx, cardStore, _) => GestureDetector(
-                              onTap: () => cardStore.card.informative
-                                  ? cong1.flipcard()
-                                  : null,
-                              child: FlipCard(
-                                onTapFlipping: false,
-                                controller: cong1,
-                                axis: FlipAxis.vertical,
-                                rotateSide: RotateSide.left,
-                                animationDuration:
-                                    const Duration(milliseconds: 1000),
-                                frontWidget: Center(
-                                    child: ExampleCard(
-                                        cardStore.card, opacity, false)),
-                                backWidget:
-                                    ExampleCard(cardStore.card, opacity, true),
-                              ),
-                            ),
+                            builder: (ctx, cardStore, _) {
+                              if (cardStore.flipState) {
+                                cardStore.flipState = false;
+
+                                cong1.flipcard();
+                              }
+                              return GestureDetector(
+                                onTap: () {
+                                  if (cardStore.card.informative) {
+                                    cardStore.flipState = !cardStore.flipState;
+                                    cong1.flipcard();
+                                  }
+                                },
+                                child: cardStore.card.informative?FlipCard(
+                                  onTapFlipping: false,
+                                  controller: cong1,
+                                  axis: FlipAxis.vertical,
+                                  rotateSide: RotateSide.left,
+                                  animationDuration:
+                                      Duration(milliseconds: 1000),
+                                  frontWidget: Center(
+                                      child: ExampleCard(
+                                          cardStore.card, opacity, false)),
+                                  backWidget: cardStore.card.informative
+                                      ? ExampleCard(
+                                          cardStore.card, opacity, true)
+                                      : ExampleCard(
+                                          cardStore.card, opacity, false),
+                                ):
+                                ExampleCard(
+                                    cardStore.card, opacity, false)
+                              );
+                            },
                           ),
                         ])))),
               ),

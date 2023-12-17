@@ -11,6 +11,8 @@ var info = [
 
 
 class CardStore extends ChangeNotifier {
+  int time = 1000;
+  bool flipState= false;
   CardData card = buildStory1();
   int index = 0;
   setCard(CardData card) {

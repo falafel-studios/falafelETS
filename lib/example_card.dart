@@ -62,8 +62,7 @@ class ExampleCard extends StatelessWidget {
                 child: Padding(
                   padding:  EdgeInsets.fromLTRB(15.0, candidate.informative?30.0:60.0, 15.0, 10.0),
                   child: SingleChildScrollView(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                      child: Stack(
                     children: [
                       SizedBox(
                         child: Text(
@@ -77,14 +76,21 @@ class ExampleCard extends StatelessWidget {
                         ),
                       ),
                       candidate.informative
-                          ? Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: const Icon(
-                                Icons.touch_app_sharp,
-                                color: Colors.white,
-                                size: 35,
-                              ),
-                            )
+                          ? const Align(
+                        alignment: Alignment.bottomCenter,
+                            child: Column(
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Icon(
+                                      Icons.touch_app_sharp,
+                                      color: Colors.white,
+                                      size: 35,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          )
                           : Container(),
                     ],
                   )),
