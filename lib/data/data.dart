@@ -26,7 +26,7 @@ class CardData {
   final int id;
   final String name;
   final String text;
-  final String? information;
+  final String information;
   final bool informative;
   final Function left;
   final Function right;
@@ -36,7 +36,7 @@ class CardData {
     required this.id,
     required this.name,
     required this.text,
-    this.information,
+    required this.information,
     required this.informative,
     required this.left,
     required this.right,
