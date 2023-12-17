@@ -10,6 +10,7 @@ CardData buildStory1() {
           "i comences a parlar amb una persona. La cosa flueix "
           "i es dona la situació de petó. Procedeixes amb el petó?",
       informative: false,
+      information: "",
       left: nextStoryPoints(
           const Points(health: 0, money: 0, energy: -1, mental: -5)),
       right: nextStoryPointsAndCard(buildRightCard(),const Points(health: 10, money: -10, energy: -5, mental: 20)),
@@ -40,6 +41,7 @@ rightBranchStory2() {
   return nextStory(CardData(
       id: 2,
       name: "casa",
+      information: "",
       text:
       "La nit avança i la conversacio tambe, hi ha feeling i"
           "acabeu parlant d'anar a casa junts. Accedeixes?",
@@ -54,11 +56,13 @@ rightBranchStory2() {
                   "per tant la conversa avança. Finalment, decideixen mantenir"
                   " relacions sexuals. Amb protecció o sense?",
               informative: false,
+              information: "",
               left: aidsCard,
               right: nextStoryPointsAndCard(
                   CardData(
                       id: 4,
                       name: "YesCondoms",
+                      information: "",
                       text: "Has decidit fer us de la proteccio"
                           "anticonceptiva. Heu iniciat les relacios"
                           "sexuals amb la mala sort de que s'ha trencat"
@@ -69,6 +73,7 @@ rightBranchStory2() {
                           CardData(
                               id: 5,
                               name: "NoContinuar",
+                              information: "",
                               text:
                                   "Heu continuat passant-ho genial mantenit altres tipus de relacions sexuals",
                               informative: false,
@@ -83,6 +88,7 @@ rightBranchStory2() {
                           CardData(
                               id: 5,
                               name: "Farmacia2",
+                              information: "",
                               text: "Has comprat la pastilla molt be",
                               informative: false,
                               left: nextStoryPoints(const Points(
@@ -104,6 +110,7 @@ buildAidsCard() {
   return nextStoryPointsAndCard(
       CardData(
         id: 4,
+        information: "",
         name: "NoCondo",
         text:
             "Has decidit tenir relacion sexuals sense proteccio i esteu preocupats"
