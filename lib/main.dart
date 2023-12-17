@@ -95,7 +95,7 @@ class StateConsumerExample extends StatelessWidget {
             FittedBox(
 
               child:Padding(
-                padding: const EdgeInsets.all(20git.0),
+                padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
                     width: 400,
                     child: Consumer<CardStore>(
