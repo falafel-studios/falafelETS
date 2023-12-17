@@ -1,7 +1,9 @@
-import 'package:falafel_ets/data/data.dart';
 import 'package:falafel_ets/data/stores.dart';
+import 'package:falafel_ets/example_card.dart';
+import 'package:falafel_ets/flutter_card_swiper.dart';
 import 'package:falafel_ets/liquid.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+        textTheme: GoogleFonts.josefinSansTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -49,61 +52,115 @@ class MyApp extends StatelessWidget {
 class StateConsumerExample extends StatelessWidget {
   const StateConsumerExample({super.key});
 
+  bool Function(
+          int previousIndex, int? currentIndex, CardSwiperDirection direction)
+      _onSwipe(BuildContext context) {
+    return (
+      int previousIndex,
+      int? currentIndex,
+      CardSwiperDirection direction,
+    ) {
+      var bool = direction.name == "left";
+      debugPrint(
+        'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top, $bool',
+      );
+      var cardStore = Provider.of<CardStore>(context, listen: false);
+      if (bool) {
+        cardStore.card.left(context);
+      } else {
+        cardStore.card.right(context);
+      }
+      return true;
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final CardSwiperController controller = CardSwiperController();
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text("Title"),
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const PointsBar(),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Consumer<CardStore>(
-              builder: (context, cardSt, _) => Text(
-                cardSt.card.name,
-                style: Theme.of(context).textTheme.headlineMedium,
+        child: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const PointsBar(),
+              FittedBox(
+                  child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                    width: 400,
+                    child: Consumer<CardStore>(
+                      builder: (context, cardSt, _) => Text(
+                        cardSt.card.text,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    )),
+              )),
+              Container(
+                width: 300,
+                height: 400,
+                child: CardSwiper(
+                    controller: controller,
+                    cardsCount: 3,
+                    onSwipe: _onSwipe(context),
+                    numberOfCardsDisplayed: 3,
+                    backCardOffset: const Offset(0, 0),
+                    padding: const EdgeInsets.all(24.0),
+                    cardBuilder: (
+                      context,
+                      index,
+                      horizontalThresholdPercentage,
+                      verticalThresholdPercentage,
+                      opacity,
+                    ) =>
+                        Center(
+                            child: Container(
+                                width: 300,
+                                child: Stack(children: [
+                                  Consumer<CardStore>(
+                                      builder: (ctx, cardStore, _) =>
+                                          ExampleCard(cardStore.card, opacity)),
+                                  Opacity(
+                                      opacity: opacity.abs(),
+                                      child: opacity < 0
+                                          ? const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 15.0, top: 6.0),
+                                                    child: Text(
+                                                      "No",
+                                                      style: TextStyle(
+                                                          fontSize: 40),
+                                                    ),
+                                                  )
+                                                ])
+                                          : const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: 15.0, top: 6.0),
+                                                    child: Text(
+                                                      "Si",
+                                                      style: TextStyle(
+                                                          fontSize: 40),
+                                                    ),
+                                                  )
+                                                ]))
+                                ])))),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          var cardStore = Provider.of<CardStore>(context, listen: false);
-          var pointStore = Provider.of<PointStore>(context, listen: false);
-          pointStore.addPoints(
-              const Points(health: -5, money: 5, energy: 10, mental: 3));
-          cardStore.setCard(info[(cardStore.card.id + 1) % info.length]);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
