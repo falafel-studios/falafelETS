@@ -12,7 +12,7 @@ CardData buildStory1() {
       informative: false,
       left: nextStoryPoints(
           const Points(health: 0, money: 0, energy: -1, mental: -5)),
-      right: nextStory(buildRightCard()),
+      right: nextStoryPointsAndCard(buildRightCard(),const Points(health: 10, money: -10, energy: -5, mental: 20)),
       img: "");
 }
 
@@ -54,7 +54,7 @@ rightBranchStory2() {
           "La nit avança i la cosa rulla, entre broma i broma acabeu parlant d'anar a casa junts. Accedeixes?",
       informative: false,
       left: nextStoryPoints(
-          const Points(health: 0, money: 0, energy: 0, mental: 0)),
+          const Points(health: 0, money: 10, energy: 10, mental: 20)),
       right: nextStoryPointsAndCard(
           CardData(
               id: 3,
@@ -87,7 +87,7 @@ rightBranchStory2() {
                                   health: 0, money: 0, energy: 0, mental: 0)),
                               img: ""),
                           const Points(
-                              health: 30, money: 10, energy: 10, mental: 20)),
+                              health:5 , money: 10, energy: 10, mental: 15)),
                       right: nextStoryPointsAndCard(
                           CardData(
                               id: 5,
@@ -100,11 +100,11 @@ rightBranchStory2() {
                                   health: 0, money: 0, energy: 0, mental: 0)),
                               img: ""),
                           const Points(
-                              health: -30, money: 0, energy: 0, mental: 0)),
+                              health: -10, money: 0, energy: 0, mental: 0)),
                       img: ""),
                   const Points(health: 0, money: 0, energy: 0, mental: 0)),
               img: ""),
-          const Points(health: 0, money: -5, energy: -20, mental: 50)),
+          const Points(health: 0, money: -5, energy: -10, mental: 15)),
       img: ""));
 }
 
@@ -134,7 +134,7 @@ buildAidsExplain() {
                   "Us heu despertat el dia seguent i us esteu plantejant si anar a aconseguir la pastilla per el VIH. Que feu, aneu a comprar-la?",
               informative: false,
               left: nextStoryPoints(const Points(
-                  health: -15, money: 20, energy: -20, mental: -10)),
+                  health: -10, money: 15, energy: -10, mental: -10)),
               right: nextStory(CardData(
                   id: 7,
                   name: "PatillaComprada",
@@ -154,7 +154,7 @@ buildAidsExplain() {
                   img: "")),
               img: "")),
           img: ""),
-      const Points(health: -75, money: -10, energy: -30, mental: -30));
+      const Points(health: 10, money: -10, energy: -10, mental: -10));
 }
 
 buildAidsCard() {
@@ -170,5 +170,5 @@ buildAidsCard() {
         right: buildAidsExplain2,
         img: '',
       ),
-      const Points(health: -75, money: -10, energy: -30, mental: -30));
+      const Points(health: -5, money: -10, energy: -3, mental: -3));
 }
