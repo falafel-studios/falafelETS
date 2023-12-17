@@ -86,78 +86,87 @@ class StateConsumerExample extends StatelessWidget {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ConstrainedBox(
-          
-          constraints: BoxConstraints.t,
+        child:  SizedBox(
+          width: 300,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LiquidCustomProgressIndicatorPage(),
-              Consumer<CardStore>(
-                builder: (context, cardSt, _) => Text(
-                  cardSt.card.text,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-              Container(
-                width: 300,
-                height: 400,
-                child: CardSwiper(
-                    controller: controller,
-                    cardsCount: 3,
-                    onSwipe: _onSwipe(context),
-                    numberOfCardsDisplayed: 3,
-                    backCardOffset: const Offset(0, 0),
-                    padding: const EdgeInsets.all(24.0),
-                    cardBuilder: (
-                      context,
-                      index,
-                      horizontalThresholdPercentage,
-                      verticalThresholdPercentage,
-                      opacity,
-                    ) =>
-                        Center(
-                            child: Container(
-                                width: 300,
-                                child: Stack(children: [
-                                  Consumer<CardStore>(
-                                      builder: (ctx, cardStore, _) =>
-                                          ExampleCard(cardStore.card,opacity)),
-                                  Opacity(
-                                      opacity: opacity.abs(),
-                                      child: opacity < 0
-                                          ? const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(left: 15.0,top: 6.0),
-                                                    child: Text(
-                                                      "No",
-                                                      style:
-                                                          TextStyle(fontSize: 40),
-                                                    ),
-                                                  )
-                                                ])
-                                          : const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(right: 15.0,top: 6.0),
-                                                    child: Text(
-                                                      "Si",
-                                                      style:
-                                                          TextStyle(fontSize: 40),
-                                                    ),
-                                                  )
-                                                ]))
-                                ])))),
-              ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  LiquidCustomProgressIndicatorPage(),
+            FittedBox(
 
-            ],
-          ),
+              child:Padding(
+                padding: const EdgeInsets.all(20git.0),
+                child: SizedBox(
+                    width: 400,
+                    child: Consumer<CardStore>(
+                      builder: (context, cardSt, _) => Text(
+                        cardSt.card.text,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    )),
+              )),
+                  Container(
+                    width: 300,
+                    height: 400,
+                    child: CardSwiper(
+                        controller: controller,
+                        cardsCount: 3,
+                        onSwipe: _onSwipe(context),
+                        numberOfCardsDisplayed: 3,
+                        backCardOffset: const Offset(0, 0),
+                        padding: const EdgeInsets.all(24.0),
+                        cardBuilder: (
+                          context,
+                          index,
+                          horizontalThresholdPercentage,
+                          verticalThresholdPercentage,
+                          opacity,
+                        ) =>
+                            Center(
+                                child: Container(
+                                    width: 300,
+                                    child: Stack(children: [
+                                      Consumer<CardStore>(
+                                          builder: (ctx, cardStore, _) =>
+                                              ExampleCard(cardStore.card,opacity)),
+                                      Opacity(
+                                          opacity: opacity.abs(),
+                                          child: opacity < 0
+                                              ? const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.only(left: 15.0,top: 6.0),
+                                                        child: Text(
+                                                          "No",
+                                                          style:
+                                                              TextStyle(fontSize: 40),
+                                                        ),
+                                                      )
+                                                    ])
+                                              : const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.only(right: 15.0,top: 6.0),
+                                                        child: Text(
+                                                          "Si",
+                                                          style:
+                                                              TextStyle(fontSize: 40),
+                                                        ),
+                                                      )
+                                                    ]))
+                                    ])))),
+                  ),
+
+                ],
+              ),
         ),
+
+
       ),
     );
   }
