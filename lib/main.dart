@@ -1,20 +1,26 @@
 import 'package:falafel_ets/data/stores.dart';
 import 'package:falafel_ets/example_card.dart';
 import 'package:falafel_ets/flutter_card_swiper.dart';
+import 'package:falafel_ets/gameover_screen.dart';
 import 'package:falafel_ets/liquid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_flip_card/flutter_flip_card.dart';
 
 void main() {
   runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => CardStore()),
-      ChangeNotifierProvider(create: (context) => PointStore())
-    ],
-    child: const MyApp(),
-  ));
+      providers: [
+        ChangeNotifierProvider(create: (context) => CardStore()),
+        ChangeNotifierProvider(create: (context) => PointStore())
+      ],
+      child: Consumer<PointStore>(builder: (ctx, pointStore, _) {
+        if (pointStore.points.hasZero()) {
+          return const GameOver();
+        }
+
+        return const MyApp();
+      })));
 }
 
 class MyApp extends StatelessWidget {
@@ -120,31 +126,32 @@ class StateConsumerExample extends StatelessWidget {
                                 cong1.flipcard();
                               }
                               return GestureDetector(
-                                onTap: () {
-                                  if (cardStore.card.informative) {
-                                    cardStore.flipState = !cardStore.flipState;
-                                    cong1.flipcard();
-                                  }
-                                },
-                                child: cardStore.card.informative?FlipCard(
-                                  onTapFlipping: false,
-                                  controller: cong1,
-                                  axis: FlipAxis.vertical,
-                                  rotateSide: RotateSide.left,
-                                  animationDuration:
-                                      Duration(milliseconds: 1000),
-                                  frontWidget: Center(
-                                      child: ExampleCard(
-                                          cardStore.card, opacity, false)),
-                                  backWidget: cardStore.card.informative
-                                      ? ExampleCard(
-                                          cardStore.card, opacity, true)
+                                  onTap: () {
+                                    if (cardStore.card.informative) {
+                                      cardStore.flipState =
+                                          !cardStore.flipState;
+                                      cong1.flipcard();
+                                    }
+                                  },
+                                  child: cardStore.card.informative
+                                      ? FlipCard(
+                                          onTapFlipping: false,
+                                          controller: cong1,
+                                          axis: FlipAxis.vertical,
+                                          rotateSide: RotateSide.left,
+                                          animationDuration:
+                                              Duration(milliseconds: 1000),
+                                          frontWidget: Center(
+                                              child: ExampleCard(cardStore.card,
+                                                  opacity, false)),
+                                          backWidget: cardStore.card.informative
+                                              ? ExampleCard(
+                                                  cardStore.card, opacity, true)
+                                              : ExampleCard(cardStore.card,
+                                                  opacity, false),
+                                        )
                                       : ExampleCard(
-                                          cardStore.card, opacity, false),
-                                ):
-                                ExampleCard(
-                                    cardStore.card, opacity, false)
-                              );
+                                          cardStore.card, opacity, false));
                             },
                           ),
                         ])))),

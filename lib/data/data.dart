@@ -14,6 +14,10 @@ class Points {
         mental: max(min(mental + p.mental, 100), 0));
   }
 
+  bool hasZero() {
+    return (health == 0 || money == 0 || energy == 0 || mental == 0);
+  }
+
   const Points({
     required this.health,
     required this.money,

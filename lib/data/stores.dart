@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'data.dart';
 
-
 var info = [
   buildStory1(),
 ];
 
-
-
 class CardStore extends ChangeNotifier {
   int time = 1000;
-  bool flipState= false;
+  bool flipState = false;
   CardData card = buildStory1();
   int index = 0;
   setCard(CardData card) {
@@ -20,7 +17,7 @@ class CardStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  sumIndex(){
+  sumIndex() {
     int position = (index + 1) % info.length;
     setCard(info[position]);
   }
